@@ -88,8 +88,6 @@ Run NodeJs script. This is output text:
 
 
 
-### Examples
-
 ## Settings
 <kbd>EnvironmentFiles</kbd> tool window > <kbd>Add your .env files</kbd>
 
