@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EnvValue {
-    private static final Pattern p = Pattern.compile("(\\\\.|//|#|\\$\\{.+?(?<!\\\\)})");
+    private static final Pattern p = Pattern.compile("(\\\\.|\\$\\{.+?(?<!\\\\)})");
     private final String originValue;
 
     public EnvValue(String originValue) {
@@ -29,7 +29,6 @@ public class EnvValue {
         }
         StringBuffer sb = new StringBuffer();
         Matcher matcher = p.matcher(originValue);
-        boolean appendTail = true;
         while (matcher.find()) {
             String group = matcher.group();
             if (group.startsWith("\\")) {
@@ -51,14 +50,10 @@ public class EnvValue {
                     matcher.appendReplacement(sb, Matcher.quoteReplacement(defaultValue));
                 }
             } else {
-                matcher.appendReplacement(sb, "");
-                appendTail = false;
-                break;
+                throw new RuntimeException("unexpect group: " + group);
             }
         }
-        if (appendTail) {
-            matcher.appendTail(sb);
-        }
+        matcher.appendTail(sb);
         return sb.toString();
     }
 }

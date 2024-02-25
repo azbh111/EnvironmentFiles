@@ -41,12 +41,16 @@ public class DotEnvFileProvider extends EnvFileProvider {
         try {
             for (String line : Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8)) {
                 String strippedLine = line.trim();
-                if (!strippedLine.startsWith("#") && strippedLine.contains("=")) {
-                    String[] tokens = strippedLine.split("=", 2);
-                    String key = tokens[0];
-                    String value = tokens[1];
-                    result.put(key, value);
+                if (strippedLine.startsWith("#") || strippedLine.startsWith("//")) {
+                    continue;
                 }
+                if (!strippedLine.contains("=")) {
+                    continue;
+                }
+                String[] tokens = strippedLine.split("=", 2);
+                String key = tokens[0];
+                String value = tokens[1];
+                result.put(key, value);
             }
         } catch (IOException ex) {
             throw new EnvSourceException(ex);

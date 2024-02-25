@@ -8,13 +8,88 @@
 <!-- Plugin description -->
 
 EnvironmentFiles plugin provides settings to configure project-wide `.env` files.
-Environment variables will be applied to:
+Environment variables will be applied to Terminal and Run Configurations.
+
+
+[GitHub](https://github.com/azbh111/EnvironmentFiles)
+
+## Features
+* Variable Expansion
 * Terminal in all IDEA-based products (tested on macOS)
 * Java Run Configurations in all IDEA-based products (tested on macOS)
 * Java Test Run Configurations in all IDEA-based products (tested on macOS)
-* NodeJs Run Configuration in all IDEA-based products (tested on macOS)
+* No[1.env](..%2Fdhook-offline%2F1.env)
+[2.env](..%2Fdhook-offline%2F2.env)deJs Run Configuration in all IDEA-based products (tested on macOS)
 
-[GitHub](https://github.com/azbh111/EnvironmentFiles)
+## Variable Expansion
+
+The plugin supports referencing environment variables using placeholders and also supports single-line comments.
+
+Placeholder: `${...}`
+
+Single-line comment: `//`, `#`
+
+proirity: `EnvironmentFiles` > `Terminal/RunConfiguration Environment` > `System Environment`
+
+
+### Examples
+Using files 1.env/2.env as examples.
+
+1.env
+```shell
+# comment will be ignored
+ENV_aa=${ENV_aa:aa}\${ENV_aa}
+// comment will be ignored
+ENV_bb="  ${ENV_aa}bb${ENV_bb\}  "
+```
+
+2.env
+```shell
+ENV_cc='  ${ENV_bb}cc  '
+ENV_dd=${ENV_cc}dd
+ENV_ee=${ENV_ee:ee}
+ENV_ZSH=${ZSH}
+```
+
+System Environment
+```shell
+ZSH=/Users/zyp/.oh-my-zsh
+```
+
+NodeJs Run Configuration Environment
+```shell
+ENV_aa=aaaa
+ENV_ff=ff
+ENV_ee=eeee
+```
+![img.png](assets/img.png)
+
+NodeJs Script
+```js
+console.log("[" + process.env.ENV_aa + "]")
+console.log("[" + process.env.ENV_bb + "]")
+console.log("[" + process.env.ENV_cc + "]")
+console.log("[" + process.env.ENV_dd + "]")
+console.log("[" + process.env.ENV_ee + "]")
+console.log("[" + process.env.ENV_ff + "]")
+console.log("[" + process.env.ENV_ZSH + "]")
+```
+
+
+Run NodeJs script. This is output text:
+```
+[aaaa${ENV_aa}]
+[  aaaa${ENV_aa}bb${ENV_bb}  ]
+[    aaaa${ENV_aa}bb${ENV_bb}  cc  ]
+[    aaaa${ENV_aa}bb${ENV_bb}  cc  dd]
+[ee]
+[ff]
+[/Users/zyp/.oh-my-zsh]
+```
+
+
+
+### Examples
 
 ## Settings
 <kbd>EnvironmentFiles</kbd> tool window > <kbd>Add your .env files</kbd>
