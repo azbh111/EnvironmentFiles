@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <runConfigurationExtension implementation="com.github.azbh111.ideaplugin.environmentvariable.customizers.JavaRunConfigurationCustomizer" id="envfileIdea"/>
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="JavaScript">
+        <nodeRunConfigurationExtension implementation="com.github.azbh111.ideaplugin.environmentvariable.customizers.NodeRunConfigurationCustomizer"></nodeRunConfigurationExtension>
+    </extensions>
+</idea-plugin>
