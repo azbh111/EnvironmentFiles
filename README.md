@@ -28,6 +28,8 @@ Placeholder: `${...}`
 
 Single-line comment: `//`, `#`
 
+Escape char: `\ `
+
 proirity: `EnvironmentFiles` > `Terminal/RunConfiguration Environment` > `System Environment`
 
 
