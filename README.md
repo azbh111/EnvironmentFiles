@@ -10,11 +10,9 @@
 EnvironmentFiles plugin provides settings to configure project-wide `.env` files.
 Environment variables will be applied to:
 * Terminal in all IDEA-based products (tested on macOS)
-
-Run Configuration support:
-* Java Run Configurations (IDEA)
-* Java Test Run Configurations (IDEA)
-* NodeJs Run Configuration (IDEA)
+* Java Run Configurations in all IDEA-based products (tested on macOS)
+* Java Test Run Configurations in all IDEA-based products (tested on macOS)
+* NodeJs Run Configuration in all IDEA-based products (tested on macOS)
 
 [GitHub](https://github.com/azbh111/EnvironmentFiles)
 
