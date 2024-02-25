@@ -27,7 +27,7 @@ You can also toggle plugin features: <kbd>EnvironmentFiles</kbd> tool window > <
 * Inheriting System Environments
 
 ## Credits
-Source code mostly based on [ProjectEnv](https://github.com/BredoGen/ProjectEnv) plugin by BredoGen. Special thanks for his great work.
+Source code mostly based on [ProjectEnv](https://github.com/BredoGen/ProjectEnv) plugin by Alexander Bayagin. Special thanks for his great work.
 <!-- Plugin description end -->
 
 ## Installation
