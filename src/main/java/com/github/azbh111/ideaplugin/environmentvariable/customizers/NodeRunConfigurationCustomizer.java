@@ -11,6 +11,7 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.javascript.nodejs.execution.AbstractNodeTargetRunProfile;
 import com.intellij.javascript.nodejs.execution.runConfiguration.AbstractNodeRunConfigurationExtension;
 import com.intellij.javascript.nodejs.execution.runConfiguration.NodeRunConfigurationLaunchSession;
+import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +19,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class NodeRunConfigurationCustomizer extends AbstractNodeRunConfigurationExtension {
+    // 兼容u231：版本<231时，这个方法是抽象的，必须实现
+    @Nullable
+    public SettingsEditor createEditor(@NotNull AbstractNodeTargetRunProfile configuration) {
+        return null;
+    }
+
+    // 兼容u231：版本<231时，这个方法是抽象的，必须实现
+    @Nullable
+    public String getEditorTitle() {
+        return null;
+    }
+
     @Override
     public boolean isApplicableFor(@NotNull AbstractNodeTargetRunProfile abstractNodeTargetRunProfile) {
         return true;
