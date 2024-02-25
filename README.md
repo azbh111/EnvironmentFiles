@@ -1,8 +1,8 @@
 # EnvironmentFiles
 
 ![Build](https://github.com/azbh111/EnvironmentFiles/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/17044-projectenv.svg)](https://plugins.jetbrains.com/plugin/17044)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/17044.svg)](https://plugins.jetbrains.com/plugin/17044)
+[![Version](https://img.shields.io/jetbrains/plugin/v/17044-projectenv.svg)](https://plugins.jetbrains.com/plugin/23829)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/17044.svg)](https://plugins.jetbrains.com/plugin/23829)
 
 
 <!-- Plugin description -->
@@ -18,7 +18,7 @@ Environment variables will be applied to Terminal and Run Configurations.
 * Terminal in all IDEA-based products (tested on macOS)
 * Java Run Configurations in all IDEA-based products (tested on macOS)
 * Java Test Run Configurations in all IDEA-based products (tested on macOS)
-* NodeJs Run Configuration in all IDEA-based products (tested on macOS)
+* NodeJs Run Configuration in all IDEA-based products (tested on macOS, only works begin Intellij 2022)
 
 ## Variable Expansion
 
@@ -61,7 +61,7 @@ ENV_aa=aaaa
 ENV_ff=ff
 ENV_ee=eeee
 ```
-![img.png](assets/img.png)
+![img.png](https://github.com/azbh111/EnvironmentFiles/blob/master/assets/img.png?raw=true)
 
 NodeJs Script
 ```js

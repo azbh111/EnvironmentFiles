@@ -39,10 +39,13 @@ public final class EnvService implements PersistentStateComponent<DataStorage> {
             envFiles = new ArrayList<>();
         }
         Set<String> set = new HashSet<>();
-        envFiles = envFiles.stream()
-                .filter(i -> set.add(i.getParams().get("path")))
-                .toList();
-        data.setEnvFiles(envFiles);
+        List<EnvSourceEntry> list = new ArrayList<>();
+        for (EnvSourceEntry envFile : envFiles) {
+            if (set.add(envFile.getParams().get("path"))) {
+                list.add(envFile);
+            }
+        }
+        data.setEnvFiles(list);
     }
 
     public List<EnvSourceEntry> getEnvFiles() {
