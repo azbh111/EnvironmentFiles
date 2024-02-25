@@ -115,6 +115,9 @@ public final class EnvService implements PersistentStateComponent<DataStorage> {
         }
         result.putAll(parent);
         for (EnvSourceEntry envFile : data.getEnvFiles()) {
+            if (!envFile.isEnable()) {
+                continue;
+            }
             if (envFile.getProvider().isValid()) {
                 try {
                     Map<String, String> map = envFile.getProvider().getEnvValues();
