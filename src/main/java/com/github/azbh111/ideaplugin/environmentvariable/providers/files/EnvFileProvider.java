@@ -13,7 +13,9 @@ import com.intellij.util.OpenSourceUtil;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class EnvFileProvider implements EnvProvider {
@@ -47,7 +49,7 @@ public abstract class EnvFileProvider implements EnvProvider {
         return params.getOrDefault("path", "");
     }
 
-    public static Map<String, String> createParams(Project project) {
+    public static List<Map<String, String>> createParams(Project project) {
         FileChooserDescriptor fileDescriptor = FileChooserDescriptorFactory.createMultipleFilesNoJarsDescriptor();
         fileDescriptor.withShowHiddenFiles(true);
         fileDescriptor.setTitle("Choose Env File");
@@ -59,14 +61,21 @@ public abstract class EnvFileProvider implements EnvProvider {
                 return !virtualFile.isDirectory() && virtualFile.getPath().endsWith(".env");
             }
         });
-        VirtualFile file = FileChooser.chooseFile(fileDescriptor, project, null);
-        if (file != null && !file.isDirectory()) {
-            Map<String, String> params = new HashMap<>();
-            params.put("path", file.getPath());
-            return params;
+
+        List<Map<String, String>> list = new ArrayList<>();
+        VirtualFile[] virtualFiles = FileChooser.chooseFiles(fileDescriptor, project, null);
+        if (virtualFiles != null) {
+            for (VirtualFile file : virtualFiles) {
+                if (file.isDirectory()) {
+                    continue;
+                }
+                Map<String, String> params = new HashMap<>();
+                params.put("path", file.getPath());
+                list.add(params);
+            }
         }
 
-        return new HashMap<>();
+        return list;
     }
 
     @Override

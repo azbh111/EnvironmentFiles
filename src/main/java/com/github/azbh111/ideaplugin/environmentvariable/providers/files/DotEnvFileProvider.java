@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DotEnvFileProvider extends EnvFileProvider {
@@ -25,7 +26,7 @@ public class DotEnvFileProvider extends EnvFileProvider {
         }
 
         @Override
-        public Map<String, String> createParams(Project project) {
+        public List<Map<String, String>> createParams(Project project) {
             return EnvFileProvider.createParams(project);
         }
     }

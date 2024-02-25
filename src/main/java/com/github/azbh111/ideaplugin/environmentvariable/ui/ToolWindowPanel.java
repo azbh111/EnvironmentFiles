@@ -15,7 +15,10 @@ import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ToolWindowPanel extends SimpleToolWindowPanel {
     private EnvService service;
@@ -54,10 +57,22 @@ public class ToolWindowPanel extends SimpleToolWindowPanel {
         actionGroup.add(new AnAction(".env", null, AllIcons.Actions.AddFile) {
             @Override
             public void actionPerformed(AnActionEvent e) {
-                Map<String, String> params = EnvSourceEntry.getProviderFactory(EnvSourceEntry.EnvType.ENV)
+                List<Map<String, String>> params = EnvSourceEntry.getProviderFactory(EnvSourceEntry.EnvType.ENV)
                         .createParams(project);
                 if (!params.isEmpty()) {
-                    listModel.add(new EnvSourceEntry(params, EnvSourceEntry.EnvType.ENV));
+                    for (Map<String, String> param : params) {
+                        if (param != null && !param.isEmpty()) {
+                            List<EnvSourceEntry> items = listModel.getItems();
+                            Set<String> distinct = new HashSet<>();
+                            for (EnvSourceEntry item : items) {
+                                distinct.add(item.getParams().get("path"));
+                            }
+                            EnvSourceEntry envSourceEntry = new EnvSourceEntry(param, EnvSourceEntry.EnvType.ENV);
+                            if (distinct.add(envSourceEntry.getParams().get("path"))) {
+                                listModel.add(new EnvSourceEntry(param, EnvSourceEntry.EnvType.ENV));
+                            }
+                        }
+                    }
                 }
             }
         });
