@@ -48,7 +48,7 @@ public abstract class EnvFileProvider implements EnvProvider {
     }
 
     public static Map<String, String> createParams(Project project) {
-        FileChooserDescriptor fileDescriptor = FileChooserDescriptorFactory.createSingleLocalFileDescriptor();
+        FileChooserDescriptor fileDescriptor = FileChooserDescriptorFactory.createMultipleFilesNoJarsDescriptor();
         fileDescriptor.withShowHiddenFiles(true);
         fileDescriptor.setTitle("Choose Env File");
         fileDescriptor.setHideIgnored(false);

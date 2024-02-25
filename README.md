@@ -18,8 +18,7 @@ Environment variables will be applied to Terminal and Run Configurations.
 * Terminal in all IDEA-based products (tested on macOS)
 * Java Run Configurations in all IDEA-based products (tested on macOS)
 * Java Test Run Configurations in all IDEA-based products (tested on macOS)
-* No[1.env](..%2Fdhook-offline%2F1.env)
-[2.env](..%2Fdhook-offline%2F2.env)deJs Run Configuration in all IDEA-based products (tested on macOS)
+* NodeJs Run Configuration in all IDEA-based products (tested on macOS)
 
 ## Variable Expansion
 

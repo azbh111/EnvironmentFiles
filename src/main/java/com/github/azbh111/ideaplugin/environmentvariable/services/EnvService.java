@@ -13,9 +13,7 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @State(name = "EnvService", storages = {@Storage("environment_files.xml")})
 public final class EnvService implements PersistentStateComponent<DataStorage> {
@@ -37,6 +35,13 @@ public final class EnvService implements PersistentStateComponent<DataStorage> {
     }
 
     public void setEnvFiles(List<EnvSourceEntry> envFiles) {
+        if (envFiles == null) {
+            envFiles = new ArrayList<>();
+        }
+        Set<String> set = new HashSet<>();
+        envFiles = envFiles.stream()
+                .filter(i -> set.add(i.getParams().get("path")))
+                .toList();
         data.setEnvFiles(envFiles);
     }
 
