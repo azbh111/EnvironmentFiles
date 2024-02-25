@@ -1,6 +1,6 @@
 # EnvironmentFiles
 
-![Build](https://github.com/azbh111/EnvironmentFiles/workflows/Build/badge.svg)
+
 [![Version](https://img.shields.io/jetbrains/plugin/v/17044-projectenv.svg)](https://plugins.jetbrains.com/plugin/23829)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/17044.svg)](https://plugins.jetbrains.com/plugin/23829)
 
