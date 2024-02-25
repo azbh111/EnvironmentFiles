@@ -9,7 +9,7 @@ import org.jetbrains.plugins.terminal.LocalTerminalCustomizer;
 import java.util.Map;
 
 public class TerminalCustomizer extends LocalTerminalCustomizer {
-    // 兼容u222：版本>=222时，新增并使用这个方法
+    // 兼容v>=222：新增的方法，IDE使用这个方法
     public String[] customizeCommandAndEnvironment(@NotNull Project project, @Nullable String workingDirectory, @NotNull String[] command, @NotNull Map<String, String> envs) {
         if (project == null) {
             return command;

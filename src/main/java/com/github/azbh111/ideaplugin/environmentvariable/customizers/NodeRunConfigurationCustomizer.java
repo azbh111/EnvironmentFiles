@@ -4,13 +4,16 @@ import com.github.azbh111.ideaplugin.environmentvariable.services.EnvService;
 import com.github.azbh111.ideaplugin.environmentvariable.utils.NodeJsUtils;
 import com.github.azbh111.ideaplugin.environmentvariable.utils.ReflectUtils;
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Platform;
 import com.intellij.execution.configuration.EnvironmentVariablesData;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.ide.ui.laf.IntelliJLaf;
 import com.intellij.javascript.nodejs.execution.AbstractNodeTargetRunProfile;
 import com.intellij.javascript.nodejs.execution.runConfiguration.AbstractNodeRunConfigurationExtension;
 import com.intellij.javascript.nodejs.execution.runConfiguration.NodeRunConfigurationLaunchSession;
+import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
@@ -19,13 +22,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 public class NodeRunConfigurationCustomizer extends AbstractNodeRunConfigurationExtension {
-    // 兼容u231：版本<231时，这个方法是抽象的，必须实现
+    // 兼容v<231：这个方法是抽象的，必须实现
     @Nullable
     public SettingsEditor createEditor(@NotNull AbstractNodeTargetRunProfile configuration) {
         return null;
     }
 
-    // 兼容u231：版本<231时，这个方法是抽象的，必须实现
+    // 兼容v<231：这个方法是抽象的，必须实现
     @Nullable
     public String getEditorTitle() {
         return null;
@@ -41,8 +44,10 @@ public class NodeRunConfigurationCustomizer extends AbstractNodeRunConfiguration
     public NodeRunConfigurationLaunchSession createLaunchSession(@NotNull AbstractNodeTargetRunProfile configuration, @NotNull ExecutionEnvironment environment) throws ExecutionException {
         Project project = configuration.getProject();
         EnvService envService = EnvService.getInstance(project);
-        EnvironmentVariablesData envData = configuration.getEnvData();
         try {
+            // 兼容v<=222，没有getEnvData方法，因此使用反射兼容
+            EnvironmentVariablesData envData = (EnvironmentVariablesData)ReflectUtils
+                    .get(configuration, "myEnvData");
             if (envService.isEnableNodeJsConfiguration()) {
                 /*
                     nodejs的环境变量，运行后，需要恢复，不然会影响RunConfiguration里面的配置
@@ -84,7 +89,7 @@ public class NodeRunConfigurationCustomizer extends AbstractNodeRunConfiguration
                 }
             }
 
-            @Override
+            // 兼容v<=223，父类没有提供这个方法
             public void processNotStarted() {
                 try {
                     ReflectUtils.set(envData, "myEnvs", myEnvs);
