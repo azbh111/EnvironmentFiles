@@ -116,3 +116,10 @@ tasks {
         channels = listOf("stable")
     }
 }
+// 解决windows乱码问题
+tasks.withType<JavaCompile> {
+    options.encoding = "utf-8"
+}
+tasks.withType<JavaExec> {
+    systemProperty("file.encoding", "utf-8")
+}

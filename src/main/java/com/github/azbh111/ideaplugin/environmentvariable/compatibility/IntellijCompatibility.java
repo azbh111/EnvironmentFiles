@@ -12,7 +12,7 @@ public class IntellijCompatibility {
     public static ContentFactory getContentFactoryInstance() {
         try {
             ContentFactory contentFactory;
-            if (ApplicationUtils.isVersionGtThan(233)) {
+            if (ApplicationUtils.isVersionGteThan(230)) {
                 ReflectUtils.Invoker<ContentFactory> getInstance = ReflectUtils.getInvoker(ContentFactory.class, "getInstance");
                 contentFactory = getInstance.invoke(null);
             } else {
