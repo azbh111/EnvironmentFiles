@@ -28,7 +28,7 @@ public class EnvFileListCellRender extends ColoredListCellRenderer<EnvSourceEntr
                 prefix = "⛔";
             }
             append(prefix);
-            String projectPath = (project.getBaseDir().getPath() != null ? project.getBaseDir().getPath() : "") + File.separator;
+            String projectPath = (project.getBaseDir().getPath() != null ? project.getBaseDir().getPath() : "") + "/";
             String filePath = value.getName().replaceFirst(projectPath, "");
             append(filePath);
         }
