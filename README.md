@@ -63,7 +63,6 @@ ENV_aa=aaaa
 ENV_ff=ff
 ENV_ee=eeee
 ```
-![img.png](https://github.com/azbh111/EnvironmentFiles/blob/master/assets/img.png?raw=true)
 
 NodeJs Script
 ```js
