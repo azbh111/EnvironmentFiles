@@ -64,8 +64,8 @@ public class ReflectUtils {
             this.method = method;
         }
 
-        public T invoke(Object target) throws InvocationTargetException, IllegalAccessException {
-            return (T) method.invoke(target);
+        public T invoke(Object target, Object... args) throws InvocationTargetException, IllegalAccessException {
+            return (T) method.invoke(target, args);
         }
 
     }

@@ -1,5 +1,6 @@
 package com.github.azbh111.ideaplugin.environmentvariable.utils;
 
+import com.github.azbh111.ideaplugin.environmentvariable.compatibility.IntellijCompatibility;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.RunContentDescriptor;
@@ -8,8 +9,9 @@ import org.jetbrains.annotations.NotNull;
 public class NodeJsUtils {
     public static void addOnceCallback(@NotNull ExecutionEnvironment environment, @NotNull ProgramRunner.Callback callback) {
         ProgramRunner.Callback exist = environment.getCallback();
-        CallbackWrapper wrapper = new CallbackWrapper(exist, callback, () -> environment.setCallback(exist));
-        environment.setCallback(wrapper);
+        CallbackWrapper wrapper = new CallbackWrapper(exist, callback,
+            () -> IntellijCompatibility.setCallback(environment, exist));
+        IntellijCompatibility.setCallback(environment, wrapper);
     }
 
 
