@@ -12,6 +12,16 @@ import java.lang.reflect.InvocationTargetException;
 
 public class IntellijCompatibility {
 
+    public static void processNotStarted(ProgramRunner.Callback callback) {
+        try {
+            ReflectUtils.Invoker<Object> processNotStarted = ReflectUtils
+                .getInvoker(ProgramRunner.Callback.class, "processNotStarted");
+            processNotStarted.invoke(callback);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // 调用 internal API
     public static void setCallback(ExecutionEnvironment executionEnvironment,
         @Nullable ProgramRunner.@Nullable Callback callback) {

@@ -43,21 +43,21 @@ public class NodeJsUtils {
             }
         }
 
-//        @Override
-//        public void processNotStarted() {
-//            try {
-//                if (pre != null) {
-//                    pre.processNotStarted();
-//                }
-//            } finally {
-//                try {
-//                    callback.processNotStarted();
-//                } finally {
-//                    if (post != null) {
-//                        post.run();
-//                    }
-//                }
-//            }
-//        }
+        // 不加 @Override，兼容v<=223，父类没有提供这个方法
+        public void processNotStarted() {
+            try {
+                if (pre != null) {
+                    IntellijCompatibility.processNotStarted(pre);
+                }
+            } finally {
+                try {
+                    IntellijCompatibility.processNotStarted(pre);
+                } finally {
+                    if (post != null) {
+                        post.run();
+                    }
+                }
+            }
+        }
     }
 }
